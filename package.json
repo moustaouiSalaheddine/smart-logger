@@ -24,7 +24,7 @@
     "morocco"
   ],
   "author": "Salaheddine Moustaoui <moustaoui.salaheddine@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "path": "^0.12.7"
   }
