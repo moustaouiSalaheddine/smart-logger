@@ -1,10 +1,24 @@
 const path = require('path');
 
 class Logger {
-    constructor(options = {}) {
+    constructor(options = { logLevel: 'debug' }) {
         this.rootDir = this.getRootDir();
         this.logLevel = options.logLevel || 'info';
         this.logDestinations = options.logDestinations || ['console'];
+        this.colors = {
+            info: '\x1b[36m', // Cyan
+            warning: '\x1b[33m', // Yellow
+            warn: '\x1b[33m', // Yellow
+            debug: '\x1b[37m', // Yellow
+            error: '\x1b[31m', // Red
+            exception: '\x1b[31m', // Red
+            success: '\x1b[32m', // Green
+            critical: '\x1b[35m', // Magenta
+            dir: '\x1b[34m',
+            reset: '\x1b[0m' // Reset color
+        };
+        this.bold = '\x1b033[1m';
+        this.normal = '\x1b033[0m';
     }
 
     log(message, level = 'info') {
@@ -19,7 +33,7 @@ class Logger {
     }
 
     _shouldLog(level) {
-        const levels = ['debug', 'info', 'warning', 'warn', 'error', 'critical', 'dir'];
+        const levels = ['debug', 'info', 'warning', 'warn', 'error', 'exception', 'success', 'critical', 'dir'];
         return levels.indexOf(level) >= levels.indexOf(this.logLevel);
     }
 
@@ -35,7 +49,14 @@ class Logger {
     _formatMessage(message, level, callerInfo) {
         const timestamp = new Date().toISOString();
         const { fileName, lineNumber } = callerInfo;
-        return `${timestamp} [${level.toUpperCase()}] file:  ${fileName}:${lineNumber} - ${message}`;
+        const color = this.colors[level] || this.colors.info; // Default to cyan if level not found
+
+        const directory = fileName.split('/').slice(0, -1).join('/');
+        const file = fileName.split('/').pop();
+        const boldLineNumber = `\x1b[1m${lineNumber}\x1b[0m`;
+        const boldLevel = `\x1b[1m${level.toUpperCase()}\x1b[0m`;
+        const underlinedFile = `\x1b[4m${file}\x1b[1m`;
+        return `\x1b[1m${timestamp} ${color}[${level.toUpperCase()}]${this.colors.reset} ${color}${underlinedFile}:${color}${lineNumber}${this.colors.reset}\x1b[0m - ${message}`;
     }
     _formatMessageJson(message, level, callerInfo) {
         const timestamp = new Date().toISOString();
@@ -81,6 +102,14 @@ class Logger {
         this.log(message, 'error');
     }
 
+    exception(message) {
+        this.log(message, 'exception');
+    }
+
+    success(message) {
+        this.log(message, 'success');
+    }
+
     critical(message) {
         this.log(message, 'critical');
     }
@@ -90,4 +119,4 @@ class Logger {
     }
 }
 
-module.exports = Logger;
+module.exports = new Logger();
