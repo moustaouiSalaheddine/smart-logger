@@ -1,0 +1,30 @@
+{
+  "name": "smart-logger",
+  "version": "1.0.0",
+  "description": "this is smart package",
+  "main": "logger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/moustaouiSalaheddine/smart-logger)"
+  },
+  "keywords": [
+    "smart",
+    "logger",
+    "filename",
+    "file",
+    "detect",
+    "js",
+    "javascript",
+    "moustaoui",
+    "salaheddine",
+    "morocco"
+  ],
+  "author": "Salaheddine Moustaoui <moustaoui.salaheddine@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "path": "^0.12.7"
+  }
+}
