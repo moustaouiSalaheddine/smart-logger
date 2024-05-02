@@ -1,14 +1,15 @@
 {
-  "name": "smart-logger",
-  "version": "1.0.0",
+  "name": "@moustaouisalah/smart-logger",
+  "version": "1.0.1",
   "description": "this is smart package",
   "main": "logger.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://github.com/moustaouiSalaheddine/smart-logger",
   "repository": {
     "type": "git",
-    "url": "(https://github.com/moustaouiSalaheddine/smart-logger)"
+    "url": "https://github.com/moustaouiSalaheddine/smart-logger"
   },
   "keywords": [
     "smart",
